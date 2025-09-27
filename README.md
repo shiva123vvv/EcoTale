@@ -30,4 +30,4 @@ The site showcases the product, its benefits, and environmental impact with prem
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/aquapure-website.git
+git clone https://github.com/shiva123vvv/AquaPure
