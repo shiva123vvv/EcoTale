@@ -198,22 +198,6 @@ const Benefits = () => {
     ))}
   </div>
 </div>
-
-
-
-        {/* Testimonial Section */}
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
-            <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Heart className="text-white w-8 h-8" />
-            </div>
-            <blockquote className="text-2xl lg:text-3xl font-light text-gray-700 italic mb-4 leading-relaxed">
-              "AquaPure has completely changed my daily routine. Not only do I feel better staying hydrated, 
-              but I also feel good knowing I'm making a positive impact on the environment."
-            </blockquote>
-            <div className="text-gray-600 font-semibold">- Sarah Johnson, Eco-Enthusiast</div>
-          </div>
-        </div>
       </div>
     </section>
   );

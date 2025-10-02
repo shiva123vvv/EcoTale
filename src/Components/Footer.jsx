@@ -9,22 +9,55 @@ gsap.registerPlugin(ScrollTrigger);
 const Footer = () => {
   const footerRef = useRef(null);
   const contentRef = useRef(null);
+  const newsletterRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(contentRef.current.querySelectorAll('.footer-item'), 
-      { opacity: 0, y: 50 },
+    // Reset all elements to initial state
+    gsap.set(contentRef.current.querySelectorAll('.footer-item'), { 
+      opacity: 0, 
+      y: 50 
+    });
+
+    // Animate footer items on scroll
+    gsap.to(contentRef.current.querySelectorAll('.footer-item'), {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top 90%",
+        end: "bottom bottom",
+        toggleActions: "play none none none",
+        once: true
+      }
+    });
+
+    // Special animation for newsletter section
+    gsap.fromTo(newsletterRef.current, 
+      { 
+        opacity: 0, 
+        scale: 0.8,
+        y: 30
+      },
       { 
         opacity: 1, 
-        y: 0, 
-        duration: 0.8,
-        stagger: 0.1,
+        scale: 1,
+        y: 0,
+        duration: 1,
         scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse"
+          trigger: newsletterRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true
         }
       }
     );
+
+    // Clean up ScrollTrigger instances
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   const footerSections = [
@@ -71,27 +104,27 @@ const Footer = () => {
         }}></div>
       </div>
 
-      <div ref={contentRef} className="container mx-auto px-6 relative z-10 py-16">
-        {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-6 gap-8 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-2 footer-item">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+      <div ref={contentRef} className="container mx-auto px-4 sm:px-6 relative z-10 py-12 lg:py-16">
+        {/* Main Footer Content - Responsive Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          {/* Brand Section - Full width on mobile, 2 cols on sm, 2 cols on lg */}
+          <div className="sm:col-span-2 lg:col-span-2 footer-item">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-4 sm:mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg mb-3 sm:mb-0">
                 <Leaf className="text-white w-6 h-6" />
               </div>
-              <div>
+              <div className="text-center sm:text-left">
                 <h3 className="text-2xl font-bold gradient-text">AquaPure</h3>
                 <p className="text-gray-400 text-sm">Sustainable Hydration</p>
               </div>
             </div>
-            <p className="text-gray-300 leading-relaxed mb-6">
+            <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-center sm:text-left">
               Join us in creating a plastic-free future. Every AquaPure bottle 
               represents a step towards a cleaner, healthier planet for generations to come.
             </p>
             
             {/* Social Links */}
-            <div className="flex space-x-4">
+            <div className="flex justify-center sm:justify-start space-x-4">
               {socialLinks.map((social, index) => (
                 <a 
                   key={index}
@@ -105,16 +138,18 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Footer Links */}
+          {/* Footer Links - Responsive grid */}
           {footerSections.map((section, index) => (
             <div key={index} className="footer-item">
-              <h4 className="text-lg font-semibold mb-4 text-white">{section.title}</h4>
-              <ul className="space-y-3">
+              <h4 className="text-lg font-semibold mb-3 sm:mb-4 text-white text-center sm:text-left">
+                {section.title}
+              </h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
+                  <li key={linkIndex} className="text-center sm:text-left">
                     <a 
                       href="#"
-                      className="text-gray-400 hover:text-green-400 transition-colors duration-300"
+                      className="text-gray-400 hover:text-green-400 transition-colors duration-300 text-sm sm:text-base"
                     >
                       {link}
                     </a>
@@ -125,61 +160,61 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Contact Information */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        {/* Contact Information - Responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {contactInfo.map((contact, index) => (
-            <div key={index} className="footer-item flex items-center space-x-3 bg-gray-800 bg-opacity-50 rounded-xl p-4">
+            <div key={index} className="footer-item flex flex-col sm:flex-row items-center text-center sm:text-left space-y-2 sm:space-y-0 sm:space-x-3 bg-gray-800 bg-opacity-50 rounded-xl p-4">
               <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
                 <contact.icon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-gray-300">{contact.text}</span>
+              <span className="text-gray-300 text-sm sm:text-base">{contact.text}</span>
             </div>
           ))}
         </div>
 
         {/* Newsletter Subscription */}
-        <div className="footer-item bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl p-8 text-center mb-8">
-          <h4 className="text-2xl font-bold mb-2 text-white">Stay Updated</h4>
-          <p className="text-green-100 mb-4">Get the latest news and exclusive offers</p>
-          <div className="flex max-w-md mx-auto">
+        <div ref={newsletterRef} className="footer-item bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl p-6 sm:p-8 text-center mb-6 sm:mb-8">
+          <h4 className="text-xl sm:text-2xl font-bold mb-2 text-white">Stay Updated</h4>
+          <p className="text-green-100 mb-4 sm:mb-6 text-sm sm:text-base">
+            Get the latest news and exclusive offers
+          </p>
+          <div className="flex flex-col sm:flex-row max-w-md mx-auto bg-white rounded-2xl overflow-hidden shadow-lg">
             <input 
               type="email" 
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-l-2xl border-0 focus:ring-2 focus:ring-white"
+              className="flex-1 px-4 py-3 border-0 text-gray-800 focus:ring-2 focus:ring-green-500 focus:outline-none placeholder-gray-500 text-sm sm:text-base"
             />
-            <button className="bg-white text-green-600 px-6 py-3 rounded-r-2xl font-semibold hover:bg-gray-100 transition-colors duration-300">
+            <button className="bg-green-600 text-white px-4 sm:px-6 py-3 font-semibold hover:bg-green-700 transition-colors duration-300 whitespace-nowrap text-sm sm:text-base">
               Subscribe
             </button>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="footer-item border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2023 AquaPure. All rights reserved. Made with ♡ for our planet.
+        {/* Bottom Footer */}
+        <div className="footer-item border-t border-gray-700 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+          <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+            © 2024 AquaPure. Made with ♡ for our planet.
           </div>
-          <div className="flex space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-green-400 transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="hover:text-green-400 transition-colors duration-300">Terms of Service</a>
-            <a href="#" className="hover:text-green-400 transition-colors duration-300">Cookie Policy</a>
-          </div>
-        </div>
-
-        {/* Eco Impact Counter */}
-        <div className="footer-item mt-8 text-center">
-          <div className="bg-gray-800 bg-opacity-50 rounded-2xl p-6 inline-block">
-            <div className="text-2xl font-bold text-green-400 mb-2">1,245,678</div>
-            <div className="text-gray-300">Plastic bottles saved by AquaPure community</div>
+          <div className="flex flex-wrap justify-center sm:justify-start space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
+            <a href="#" className="hover:text-green-400 transition-colors duration-300 mb-2 sm:mb-0">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-green-400 transition-colors duration-300 mb-2 sm:mb-0">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-green-400 transition-colors duration-300">
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>
 
       {/* Floating leaves decoration */}
-      <div className="absolute bottom-0 left-0 w-full h-20 overflow-hidden">
-        {[...Array(15)].map((_, i) => (
+      <div className="absolute bottom-0 left-0 w-full h-16 sm:h-20 overflow-hidden">
+        {[...Array(10)].map((_, i) => (
           <div 
             key={i}
-            className="absolute text-2xl opacity-20"
+            className="absolute text-xl sm:text-2xl opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               bottom: `${Math.random() * 20}%`,
@@ -191,6 +226,28 @@ const Footer = () => {
           </div>
         ))}
       </div>
+
+      {/* Add CSS animation for floating leaves */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(10deg); }
+        }
+        
+        /* Mobile-first responsive design */
+        @media (max-width: 640px) {
+          .grid-cols-1 > * {
+            margin-bottom: 1rem;
+          }
+        }
+        
+        @media (min-width: 641px) and (max-width: 1024px) {
+          .sm\:grid-cols-2 > *:nth-child(3),
+          .sm\:grid-cols-2 > *:nth-child(4) {
+            margin-top: 1rem;
+          }
+        }
+      `}</style>
     </footer>
   );
 };

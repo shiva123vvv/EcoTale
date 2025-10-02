@@ -155,40 +155,9 @@ const CTA = () => {
       className="section bg-gradient-to-br from-green-400 via-green-500 to-teal-600 relative overflow-hidden"
     >
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-300 rounded-full opacity-30 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-1 bg-white opacity-30"></div>
-      </div>
 
       <div className="container mx-auto px-6 relative z-10 py-20">
         {/* Countdown Timer */}
-        <div className="container mx-auto px-6 relative z-10 py-20">
-  {/* Countdown Timer */}
-  <div ref={countdownRef} className="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-6 text-center mb-8 max-w-md mx-auto shadow-2xl">
-    <div className="text-gray-800 font-semibold mb-2">🚀 Limited Time Offer</div>
-    <div className="flex justify-center space-x-4 text-2xl font-bold text-gray-800">
-      <div className="flex flex-col items-center">
-        <span className="bg-white bg-opacity-30 text-gray-900 px-3 py-1 rounded-lg">
-          {timeLeft.hours.toString().padStart(2, '0')}
-        </span>
-        <span className="text-sm mt-1 text-gray-700">Hours</span>
-      </div>
-      <div className="flex flex-col items-center">
-        <span className="bg-white bg-opacity-30 text-gray-900 px-3 py-1 rounded-lg">
-          {timeLeft.minutes.toString().padStart(2, '0')}
-        </span>
-        <span className="text-sm mt-1 text-gray-700">Minutes</span>
-      </div>
-      <div className="flex flex-col items-center">
-        <span className="bg-white bg-opacity-30 text-gray-900 px-3 py-1 rounded-lg">
-          {timeLeft.seconds.toString().padStart(2, '0')}
-        </span>
-        <span className="text-sm mt-1 text-gray-700">Seconds</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 
         {/* Title Section */}
@@ -263,19 +232,6 @@ const CTA = () => {
 </div>
 
 {/* Social Proof */}
-<div className="text-center mt-12">
-  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 max-w-2xl mx-auto">
-    <div className="flex justify-center space-x-1 mb-4">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-      ))}
-    </div>
-    <p className="text-gray-700 text-lg">
-      <span className="font-bold text-gray-800">10,000+</span> satisfied customers worldwide 
-      have already joined the AquaPure movement
-    </p>
-  </div>
-</div>
         </div>
     </section>
   );
