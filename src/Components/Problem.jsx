@@ -120,23 +120,24 @@ const Problem = () => {
       className="section bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 relative text-white overflow-hidden"
     >
       {/* Animated Background */}
-      <div className="parallax-bg" style={{
+      <div className="parallax-bg absolute inset-0" style={{
         backgroundImage: 'url(https://images.unsplash.com/photo-1573459785825-3c33aa30c0c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)',
         opacity: 0.4
       }}></div>
 
-      {/* Floating trash elements */}
-      <div ref={pollutionRef} className="absolute inset-0 pointer-events-none">
+      {/* Floating trash elements - BEHIND content */}
+      <div ref={pollutionRef} className="absolute inset-0 pointer-events-none z-0">
         {[...Array(15)].map((_, i) => (
           <div 
             key={i}
-            className={`floating-trash pollution-element absolute text-2xl opacity-60 ${
+            className={`floating-trash pollution-element absolute text-2xl opacity-40 ${
               i % 3 === 0 ? 'text-red-400' : 
               i % 3 === 1 ? 'text-yellow-400' : 'text-blue-400'
             }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              zIndex: 0
             }}
           >
             {i % 3 === 0 ? '🥤' : i % 3 === 1 ? '🍃' : '💧'}
@@ -144,9 +145,10 @@ const Problem = () => {
         ))}
       </div>
 
+      {/* Content container with higher z-index */}
       <div className="container mx-auto px-6 relative z-10 py-20">
         {/* Title Section */}
-        <div ref={titleRef} className="text-center mb-16">
+        <div ref={titleRef} className="text-center mb-16 relative z-20">
           <div className="inline-flex items-center space-x-3 bg-red-500 bg-opacity-20 px-6 py-3 rounded-full mb-6">
             <AlertTriangle className="w-6 h-6 text-red-400" />
             <span className="text-red-200 font-semibold">Critical Issue</span>
@@ -160,15 +162,15 @@ const Problem = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center relative z-20">
           {/* Content */}
           <div ref={contentRef}>
-            <div className="bg-gray-800 bg-opacity-60 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-gray-700">
+            <div className="bg-gray-800 bg-opacity-60 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-gray-700 relative z-20">
               <h3 className="text-3xl font-bold mb-6 text-red-300">The Harsh Reality</h3>
               
               <div className="space-y-6">
                 {pollutionFacts.map((fact, index) => (
-                  <div key={index} className="flex items-start space-x-4">
+                  <div key={index} className="flex items-start space-x-4 relative z-20">
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                       fact.severity === 'high' ? 'bg-red-500' : 'bg-yellow-500'
                     } bg-opacity-20 flex-shrink-0`}>
@@ -191,9 +193,9 @@ const Problem = () => {
           </div>
 
           {/* Statistics */}
-          <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-20">
             {stats.map((stat, index) => (
-              <div key={index} className="stat-item bg-gray-800 bg-opacity-40 backdrop-blur-lg rounded-2xl p-6 text-center border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105">
+              <div key={index} className="stat-item bg-gray-800 bg-opacity-40 backdrop-blur-lg rounded-2xl p-6 text-center border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 relative z-20">
                 <div className={`w-16 h-16 rounded-full bg-${stat.color}-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4`}>
                   <stat.icon className={`w-8 h-8 text-${stat.color}-400`} />
                 </div>
@@ -205,7 +207,7 @@ const Problem = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-16 relative z-20">
           <div className="bg-gradient-to-r from-red-500 to-orange-500 bg-opacity-20 backdrop-blur-lg rounded-2xl p-8 border border-red-500 border-opacity-30 max-w-2xl mx-auto">
             <h4 className="text-2xl font-bold mb-4 text-white">But There's Hope</h4>
             <p className="text-gray-200 text-lg mb-6">

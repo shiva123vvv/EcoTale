@@ -9,7 +9,6 @@ import Solution from './Components/Solution';
 import Benefits from './Components/Benefits';
 import CTA from './Components/CTA';
 import Footer from './Components/Footer';
-import ScrollIndicator from './Components/ScrollIndicator';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +46,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <ScrollIndicator />
       <main>
         <Intro />
         <Problem />

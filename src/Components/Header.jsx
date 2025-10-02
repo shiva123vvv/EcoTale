@@ -76,7 +76,7 @@ const Header = () => {
      
 
         <nav ref={navRef} className="hidden md:flex items-center">
-  <ul className="flex items-center space-x-12">
+  <ul className="flex items-center space-x-4">
     {navItems.map((item, index) => (
       <li key={index}>
         <a

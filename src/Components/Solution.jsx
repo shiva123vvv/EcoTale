@@ -134,8 +134,8 @@ const Solution = () => {
         {/* Title Section */}
         <div ref={titleRef} className="text-center mb-16">
           <div className="inline-flex items-center space-x-3 bg-green-500 bg-opacity-20 px-6 py-3 rounded-full mb-6">
-            <Award className="w-6 h-6 text-green-600" />
-            <span className="text-green-700 font-semibold">Innovative Solution</span>
+            <Award className="w-6 h-6 text-white" />
+            <span className="text-white font-semibold">Innovative Solution</span>
           </div>
           <h2 className="text-5xl lg:text-7xl font-bold mb-6 text-gray-900">
             Meet <span className="gradient-text">AquaPure</span>
@@ -146,19 +146,20 @@ const Solution = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          {/* Text Content */}
-          <div ref={textRef}>
-            <div className="bg-white bg-opacity-80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white">
+        {/* Content Section - Equal height and width */}
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch mb-20">
+          {/* Text Content - Now with equal height */}
+          <div ref={textRef} className="flex h-full">
+            <div className="bg-white bg-opacity-80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white w-full flex flex-col">
               <h3 className="text-3xl font-bold mb-6 text-gray-900">Why AquaPure Stands Out</h3>
               
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed flex-grow">
                 In a world overwhelmed by single-use plastics, AquaPure offers a beautiful, 
                 functional, and sustainable alternative. Each bottle is crafted with precision 
                 and care for both you and the planet.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-4 mb-6">
                 {specifications.map((spec, index) => (
                   <div key={index} className="flex justify-between items-center py-3 border-b border-gray-200 last:border-b-0">
                     <span className="font-semibold text-gray-700">{spec.label}:</span>
@@ -167,7 +168,7 @@ const Solution = () => {
                 ))}
               </div>
 
-              <div className="mt-6 p-4 bg-green-50 rounded-xl border border-green-200">
+              <div className="mt-auto p-4 bg-green-50 rounded-xl border border-green-200">
                 <p className="text-green-700 text-center font-medium">
                   🌱 Each AquaPure bottle prevents approximately 156 plastic bottles from entering landfills annually.
                 </p>
@@ -175,22 +176,23 @@ const Solution = () => {
             </div>
           </div>
 
-          {/* Bottle Image */}
-          <div className="flex justify-center">
-            <div className="relative">
+          {/* Bottle Image - Now with equal height container */}
+          <div className="flex items-center justify-center h-full">
+            <div className="relative w-full h-full flex items-center justify-center min-h-[500px]">
               <img 
                 ref={bottleRef}
                 src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                 alt="AquaPure Eco-Friendly Water Bottle"
-                className="w-80 lg:w-96 h-auto drop-shadow-2xl transition-all duration-500"
+                className="max-w-full max-h-full w-auto h-auto object-contain drop-shadow-2xl transition-all duration-500"
               />
-              
+
               {/* Glow effect */}
               <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-30 -z-10"></div>
-              
+
               {/* Eco badge */}
-              <div className="absolute -top-4 -right-4">
-                <div className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-pulse-glow">
+              <div className="absolute top-4 right-4 z-20">
+                <div className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-pulse flex items-center gap-2">
+                  <span>♻️</span>
                   ECO FRIENDLY
                 </div>
               </div>
@@ -213,23 +215,22 @@ const Solution = () => {
 
         {/* Environmental Impact */}
         <div className="mt-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-3xl p-8 text-white text-center shadow-2xl">
-  <h4 className="text-2xl font-bold mb-8">Your Environmental Impact</h4>
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-    <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
-      <div className="text-3xl font-bold mb-2 text-black">156</div>
-      <div className="text-sm text-black">Plastic bottles saved yearly</div>
-    </div>
-    <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
-      <div className="text-3xl font-bold mb-2 text-black">85%</div>
-      <div className="text-sm text-black">Carbon footprint reduced</div>
-    </div>
-    <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
-      <div className="text-3xl font-bold mb-2 text-black">100%</div>
-      <div className="text-sm text-black">Recyclable materials</div>
-    </div>
-  </div>
-</div>
-
+          <h4 className="text-2xl font-bold mb-8">Your Environmental Impact</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2 text-black">156</div>
+              <div className="text-sm text-black">Plastic bottles saved yearly</div>
+            </div>
+            <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2 text-black">85%</div>
+              <div className="text-sm text-black">Carbon footprint reduced</div>
+            </div>
+            <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2 text-black">100%</div>
+              <div className="text-sm text-black">Recyclable materials</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
